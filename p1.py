@@ -33,6 +33,22 @@ def getCardValue(card):
       value = str(card)
    return value
 
+def whoWins(dealervalue,playervalue):
+   result = ""
+   if(dealervalue > 21 and playervalue > 21):
+      result = "draw"
+   if(dealervalue == playervalue):
+      result ="draw"
+   if(dealervalue > 21):
+      result = "player"
+   if(playervalue > 21):
+      result = "dealer"
+   if(playervalue > dealervalue):
+      result = "player"
+   else
+      result = "dealer"
+   return result
+
 def game():
    print("Game starting, type quit to exit program")
    deck = makeCards(8)
@@ -42,8 +58,8 @@ def game():
    playerhand = []
    dealerhand.append(deck[dealerdraw])
    playerhand.append(deck[playerdraw])
-   dealerhandvalue = getCardValue(dealerhand[0])
-   playerhandvalue = getCardValue(playerhand[0])
+   dealerhandvalue = int(getCardValue(dealerhand[0]))
+   playerhandvalue = int(getCardValue(playerhand[0]))
    if(dealerhandvalue==0):
       dealerhandvalue = 11
    if(playerhandvalue == 0):
@@ -60,11 +76,24 @@ def game():
       if(playerinput == "hit"):
          playerdraw = random.randint(0,len(deck)-1)
          playerhand.append(deck[playerdraw])
-         cardval = getCardValue(playerhand[0])
-         if(cardval = 0):
+         cardval = getCardValue(playerhand[len(playerhand)-1])
+         if(cardval == 0):
             ace = input("Would you like the ace to be 1 or 11?  ")
-            playerhandvalue += int(ace)
+            playerhandvalue = int(ace)
          else:
-            playerhandvalue += cardval
-      else(playerinput == "miss"):
-         playerhold = True      
+            playerhandvalue += int(cardval)
+      elif(playerinput == "miss"):
+         playerhold = True
+      if(dealerhandvalue < 16):
+         dealerdraw = random.randint(0,len(deck)-1)
+         dealerhand.append(deck[dealerdraw]) 
+         cardval = getCardValue(dealerhand[len(dealerhand)-1])
+         if(cardval == 0):
+            dealerhandvalue += 11
+         else:
+            dealerhandvalue += int(cardval) 
+      else:
+         dealerhold = True    
+      drawboard(dealerhand, playerhand, dealerhandvalue, playerhandvalue)
+      if(dealerhold and playerhold):
+         print(whoWins(dealervalue,playervalue)) 
