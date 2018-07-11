@@ -13,18 +13,28 @@ def drawboard(dealer,player):
    print("dealer's hand")
    print("")
    for x in range(len(dealer)):
-      print(dealer[x])
+      print(dealer[x], end = " ", flush = True)
    print("")
    print("---------------")
    print("player's hand")
    print("")
    for x in range(len(player)):
-      print(str(player[x]))
+      print(str(player[x],end = " ", flush = True))
    print("")
    print("---------------")  
 
 def game():
    print("Game starting, type quit to exit program")
    deck = makeCards(8)
-   number = random.randint(0,len(deck)-1) 
-   
+   dealerDraw = random.randint(0,len(deck)-1) 
+   playerDraw = random,randint(0,len(deck)-1)
+   dealerHand = []
+   playerHand = []
+   dealerHand.append(deck[dealerDraw])
+   playerHand.append(deck[dealerDraw])
+   drawboard(dealerHand, playerHand)
+   playerinput = input("Would you like to hit or miss?  ")
+   while(playerinput.lower() != "quit"):
+      
+  
+    
