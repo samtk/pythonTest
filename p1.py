@@ -45,7 +45,7 @@ def whoWins(dealervalue,playervalue):
       result = "dealer"
    if(playervalue > dealervalue):
       result = "player"
-   else
+   else:
       result = "dealer"
    return result
 
@@ -72,18 +72,19 @@ def game():
    playerhold = False
    dealerhold = False
    while(playerinput.lower() != "quit"):
-      playerinput = input("Would you like to hit or miss?  ")
-      if(playerinput == "hit"):
-         playerdraw = random.randint(0,len(deck)-1)
-         playerhand.append(deck[playerdraw])
-         cardval = getCardValue(playerhand[len(playerhand)-1])
-         if(cardval == 0):
-            ace = input("Would you like the ace to be 1 or 11?  ")
-            playerhandvalue = int(ace)
-         else:
-            playerhandvalue += int(cardval)
-      elif(playerinput == "miss"):
-         playerhold = True
+      if(playerhold == False):
+         playerinput = input("Would you like to hit or miss?  ")
+         if(playerinput == "hit"):
+            playerdraw = random.randint(0,len(deck)-1)
+            playerhand.append(deck[playerdraw])
+            cardval = getCardValue(playerhand[len(playerhand)-1])
+            if(cardval == 0):
+               ace = input("Would you like the ace to be 1 or 11?  ")
+               playerhandvalue = int(ace)
+            else:
+               playerhandvalue += int(cardval)
+         elif(playerinput == "miss"):
+            playerhold = True
       if(dealerhandvalue < 16):
          dealerdraw = random.randint(0,len(deck)-1)
          dealerhand.append(deck[dealerdraw]) 
@@ -96,4 +97,10 @@ def game():
          dealerhold = True    
       drawboard(dealerhand, playerhand, dealerhandvalue, playerhandvalue)
       if(dealerhold and playerhold):
-         print(whoWins(dealervalue,playervalue)) 
+         print(whoWins(dealerhandvalue,playerhandalue)) 
+         dealerhand = []
+         playerhand = []
+         dealerhandvalue = 0
+         playerhandvalue = 0
+         playerhold = False
+         dealerhold = False
