@@ -51,8 +51,20 @@ def game():
       playerhandvalue = int(ace)
 
    drawboard(dealerhand, playerhand, dealerhandvalue, playerhandvalue)
-   playerinput = input("Would you like to hit or miss?  ")
+   playerinput = ""
+
+   playerhold = False
+   dealerhold = False
    while(playerinput.lower() != "quit"):
-      playerinput = input("what do you want from me?")      
-  
-    
+      playerinput = input("Would you like to hit or miss?  ")
+      if(playerinput == "hit"):
+         playerdraw = random.randint(0,len(deck)-1)
+         playerhand.append(deck[playerdraw])
+         cardval = getCardValue(playerhand[0])
+         if(cardval = 0):
+            ace = input("Would you like the ace to be 1 or 11?  ")
+            playerhandvalue += int(ace)
+         else:
+            playerhandvalue += cardval
+      else(playerinput == "miss"):
+         playerhold = True      
