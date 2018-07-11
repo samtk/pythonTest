@@ -8,26 +8,26 @@ def makeCards(numdecks):
          deck.append(suit[k])
    return deck
 
-def drawboard(dealer,player):
+def drawboard(dealer,player, dvalue, pvalue):
    print("---------------")
-   print("dealer's hand")
+   print("dealer's hand ("+ str(dvalue)+")")
    print("")
    for x in range(len(dealer)):
       print(dealer[x], end = " ", flush = True)
    print("")
    print("---------------")
-   print("player's hand")
+   print("player's hand ("+ str(pvalue) + ")")
    print("")
    for x in range(len(player)):
-      print(str(player[x],end = " ", flush = True))
+      print(player[x],end = " ", flush = True)
    print("")
    print("---------------")  
 
 def getCardValue(card):
    value = 0
-   if(card == "K" || card == "Q" || card == "J"):
+   if(card == "K" or card == "Q" or card == "J"):
       value = 10
-   elif(card = "A"):
+   elif(card == "A"):
       value = 0
    else:
       value = str(card)
@@ -36,15 +36,23 @@ def getCardValue(card):
 def game():
    print("Game starting, type quit to exit program")
    deck = makeCards(8)
-   dealerDraw = random.randint(0,len(deck)-1) 
-   playerDraw = random,randint(0,len(deck)-1)
-   dealerHand = []
-   playerHand = []
-   dealerHand.append(deck[dealerDraw])
-   playerHand.append(deck[dealerDraw])
-   drawboard(dealerHand, playerHand)
+   dealerdraw = random.randint(0,len(deck)-1) 
+   playerdraw = random.randint(0,len(deck)-1)
+   dealerhand = []
+   playerhand = []
+   dealerhand.append(deck[dealerdraw])
+   playerhand.append(deck[playerdraw])
+   dealerhandvalue = getCardValue(dealerhand[0])
+   playerhandvalue = getCardValue(playerhand[0])
+   if(dealerhandvalue==0):
+      dealerhandvalue = 11
+   if(playerhandvalue == 0):
+      ace = input("Would you like the ace to be 1 or 11?  ")
+      playerhandvalue = int(ace)
+
+   drawboard(dealerhand, playerhand, dealerhandvalue, playerhandvalue)
    playerinput = input("Would you like to hit or miss?  ")
    while(playerinput.lower() != "quit"):
-            
+      playerinput = input("what do you want from me?")      
   
     
