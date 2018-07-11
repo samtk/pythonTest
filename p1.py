@@ -23,6 +23,16 @@ def drawboard(dealer,player):
    print("")
    print("---------------")  
 
+def getCardValue(card):
+   value = 0
+   if(card == "K" || card == "Q" || card == "J"):
+      value = 10
+   elif(card = "A"):
+      value = 0
+   else:
+      value = str(card)
+   return value
+
 def game():
    print("Game starting, type quit to exit program")
    deck = makeCards(8)
@@ -35,6 +45,6 @@ def game():
    drawboard(dealerHand, playerHand)
    playerinput = input("Would you like to hit or miss?  ")
    while(playerinput.lower() != "quit"):
-      
+            
   
     
